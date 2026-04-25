@@ -19,4 +19,5 @@ RUN mkdir -p uploads static
 
 EXPOSE 8000
 
-CMD ["gunicorn", "index:app", "--bind", "0.0.0.0:$PORT", "--workers", "2", "--timeout", "300"]
+# Gunakan shell form (bukan array) agar $PORT bisa dibaca Railway
+CMD gunicorn index:app --bind 0.0.0.0:${PORT:-8000} --workers 1 --timeout 300 --preload
